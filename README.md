@@ -1,6 +1,10 @@
 # Convolutional Occupancy Networks
 [**Paper**](http://www.cvlibs.net/publications/Peng2020ECCV.pdf) | [**Supplementary**](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf) | [**Video**](https://www.youtube.com/watch?v=EmauovgrDSM) | [**Project Page**](https://pengsongyou.github.io/conv_onet) <br>
 
+<div style="text-align: center">
+<img src="media/teaser_matterport.gif" width="600"/>
+</div>
+
 This repository contains the implementation of the paper:
 
 Convolutional Occupancy Networks  
