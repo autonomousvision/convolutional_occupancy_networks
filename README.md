@@ -94,7 +94,7 @@ Download Matterport3D dataset from [the official website](https://niessner.githu
 Download ScanNet v2 data from the [official ScanNet website](https://github.com/ScanNet/ScanNet).
 Then, you can preprocess data with:
 `scripts/dataset_scannet/build_dataset.py` and put into `data/ScanNet` folder.  
-**Note**: Currently, the preprocess script will scale ScanNet data to a unit cube for the comparison as shown in the paper, but you can easily adapt the code to produce data with real units. Then, you can use our fully convolutional model to run evaluation in a sliding-window manner.
+**Note**: Currently, the preprocess script normalizes ScanNet data to a unit cube for the comparison shown in the paper, but you can easily adapt the code to produce data with real-world metric. You can then use our fully convolutional model to run evaluation in a sliding-window manner.
 
 ## Usage
 When you have installed all binary dependencies and obtained the preprocessed data, you are ready to run our pre-trained models and train new models from scratch.
@@ -136,7 +136,7 @@ voxel/voxel_shapenet_1plane.pt
 voxel/voxel_shapenet_3plane.pt
 voxel/voxel_shapenet_grid32.pt
 ```
-**Note**: The `pointcloud_crop/room_grid64.yaml` corresponds to our **fully convolutional model**, which we train only on the small crops from the synthetic room dataset. This model can be directly applied to large-scale scenes with real units and generate meshes in a sliding-window manner, as shown in the [teaser](media/teaser_matterport.gif). More details can be found in section 6 of our[supplementary material](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf).
+**Note**: The `pointcloud_crop/room_grid64.yaml` corresponds to our **fully convolutional model**, which we train only on the small crops from the synthetic room dataset. This model can be directly applied to large-scale scenes with real units and generate meshes in a sliding-window manner, as shown in the [teaser](media/teaser_matterport.gif). More details can be found in section 6 of our [supplementary material](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf).
 
 ### Evaluation
 For evaluation of the models, we provide the script `eval_meshes.py`. You can run it using:
