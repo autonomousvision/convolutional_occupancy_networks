@@ -1,0 +1,43 @@
+method: onet
+data:
+  classes: null
+  input_type: voxels
+  path: data/ShapeNet
+  dim: 3
+  points_subsample: 1024
+model:
+  encoder: voxel_simple_local
+  encoder_kwargs:
+    plane_resolution: 64
+    plane_type: ['xz']
+    unet: True
+    unet_kwargs:
+      depth: 4
+      merge_mode: concat
+      start_filts: 32
+  decoder: simple_local
+  decoder_kwargs:
+    sample_mode: bilinear # bilinear / nearest
+    hidden_size: 32
+  c_dim: 32
+training:
+  out_dir:  out/voxels/shapenet_1plane
+  batch_size: 64
+  model_selection_metric: iou
+  model_selection_mode: maximize
+  print_every: 100
+  visualize_every: 10000
+  validate_every: 10000
+  checkpoint_every: 2000
+  backup_every: 10000
+  n_workers: 8
+  n_workers_val: 4
+test:
+  threshold: 0.2
+  eval_mesh: true
+  eval_pointcloud: false
+generation:
+  vis_n_outputs: 2
+  refine: false
+  n_x: 128
+  n_z: 1

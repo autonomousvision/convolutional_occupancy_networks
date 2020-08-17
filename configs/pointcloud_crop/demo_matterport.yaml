@@ -1,0 +1,23 @@
+inherit_from: configs/pointcloud_crop/room_grid64.yaml
+data:
+  input_type: pointcloud_crop
+  classes: ['']
+  path: data/demo/Matterport3D_processed
+  pointcloud_n: 200000
+  pointcloud_noise: 0.0
+  pointcloud_file: pointcloud.npz
+  voxels_file: null
+  points_file: null
+  points_iou_file: null
+  multi_files: null
+  unit_size: 0.02 # define the size of a voxel, in meter
+  query_vol_size: 90 # query crop in voxel
+training:
+  out_dir: out/demo_matterport
+test:
+  model_file: https://s3.eu-central-1.amazonaws.com/avg-projects/convolutional_occupancy_networks/models/pointcloud_crop/room_grid64.pt
+generation:
+  generation_dir: generation
+  sliding_window: True # generate mesh in the sliding-window manner
+  resolution_0: 128 # resolution for each crop
+  upsampling_steps: 0

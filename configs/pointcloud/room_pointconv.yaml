@@ -1,0 +1,43 @@
+method: conv_onet
+data:
+  input_type: pointcloud
+  classes: ['rooms_04', 'rooms_05', 'rooms_06', 'rooms_07', 'rooms_08']
+  path: data/synthetic_room_dataset
+  pointcloud_n: 10000
+  pointcloud_noise: 0.005
+  points_subsample: 2048
+  points_file: points_iou
+  points_iou_file: points_iou
+  pointcloud_file: pointcloud
+  pointcloud_chamfer_file: pointcloud
+  multi_files: 10
+  voxels_file: null
+model:
+  encoder: pointnet_plus_plus
+  decoder: simple_local_point
+  decoder_kwargs:
+    sample_mode: gaussian
+    gaussian_val: 0.2
+  c_dim: 32
+training:
+  out_dir: out/pointcloud/room_pointconv
+  batch_size: 20
+  model_selection_metric: iou
+  model_selection_mode: maximize
+  print_every: 10
+  visualize_every: 10000
+  validate_every: 10000
+  checkpoint_every: 2000
+  backup_every: 10000
+  n_workers: 8
+  n_workers_val: 4
+test:
+  threshold: 0.2
+  eval_mesh: true
+  eval_pointcloud: false
+  model_file: model_best.pt
+generation:
+  vis_n_outputs: 2
+  refine: false
+  n_x: 128
+  n_z: 1

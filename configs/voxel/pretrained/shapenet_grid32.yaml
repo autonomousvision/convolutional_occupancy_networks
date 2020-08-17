@@ -1,0 +1,5 @@
+inherit_from: configs/voxel/shapenet_grid32.yaml
+generation:
+  generation_dir: generation_pretrained
+test:
+  model_file: https://s3.eu-central-1.amazonaws.com/avg-projects/convolutional_occupancy_networks/models/voxel/voxel_shapenet_grid32.pt

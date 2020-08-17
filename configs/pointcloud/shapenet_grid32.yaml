@@ -1,0 +1,51 @@
+method: conv_onet
+data:
+  input_type: pointcloud
+  classes: null
+  path: data/ShapeNet
+  pointcloud_n: 3000
+  pointcloud_noise: 0.005
+  points_subsample: 2048
+  points_file: points.npz
+  points_iou_file: points.npz
+  # points_unpackbits: false
+  voxels_file: null
+model:
+  encoder: pointnet_local_pool
+  encoder_kwargs:
+    hidden_dim: 32
+    plane_type: 'grid'
+    grid_resolution: 32
+    unet3d: True
+    unet3d_kwargs:
+      num_levels: 3
+      f_maps: 32
+      in_channels: 32
+      out_channels: 32
+  decoder: simple_local      
+  decoder_kwargs:
+    sample_mode: bilinear # bilinear / nearest
+    hidden_size: 32
+  c_dim: 32
+training:
+  out_dir: out/pointcloud/shapenet_grid32
+  batch_size: 32
+  model_selection_metric: iou
+  model_selection_mode: maximize
+  print_every: 100
+  visualize_every: 10000
+  validate_every: 10000
+  checkpoint_every: 2000
+  backup_every: 10000
+  n_workers: 8
+  n_workers_val: 4
+test:
+  threshold: 0.2
+  eval_mesh: true
+  eval_pointcloud: false
+  model_file: model_best.pt
+generation:
+  vis_n_outputs: 2
+  refine: false
+  n_x: 128
+  n_z: 1
