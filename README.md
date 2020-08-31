@@ -1,5 +1,5 @@
 # Convolutional Occupancy Networks
-[**Paper**](https://arxiv.org/pdf/2003.04618.pdf) | [**Supplementary**](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf) | [**Video**](https://www.youtube.com/watch?v=EmauovgrDSM) | [**Teaser Video**](https://youtu.be/k0monzIcjUo) | [**Project Page**](https://pengsongyou.github.io/conv_onet) <br>
+[**Paper**](https://arxiv.org/pdf/2003.04618.pdf) | [**Supplementary**](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf) | [**Video**](https://www.youtube.com/watch?v=EmauovgrDSM) | [**Teaser Video**](https://youtu.be/k0monzIcjUo) | [**Project Page**](https://pengsongyou.github.io/conv_onet) | [**Blog Post**](https://autonomousvision.github.io/convolutional-occupancy-networks/) <br>
 
 <div style="text-align: center">
 <img src="media/teaser_matterport.gif" width="600"/>
@@ -49,7 +49,10 @@ You can now quickly test our code on the real-world scene shown in the teaser. T
 ```
 python generate.py configs/pointcloud_crop/demo_matterport.yaml
 ```
-This script should create a folder `out/demo/generation` where the output meshes and input point cloud are stored.
+This script should create a folder `out/demo_matterport/generation` where the output meshes and input point cloud are stored.
+
+**Note**: This experiment corresponds to our **fully convolutional model**, which we train only on the small crops from our synthetic room dataset. This model can be directly applied to large-scale real-world scenes with real units and generate meshes in a sliding-window manner, as shown in the [teaser](media/teaser_matterport.gif). More details can be found in section 6 of our [supplementary material](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf). For training, you can use the script `pointcloud_crop/room_grid64.yaml`.
+
 
 ### Reconstruct Synthetic Indoor Scene
 <div style="text-align: center">
@@ -136,7 +139,6 @@ voxel/voxel_shapenet_1plane.pt
 voxel/voxel_shapenet_3plane.pt
 voxel/voxel_shapenet_grid32.pt
 ```
-**Note**: The `pointcloud_crop/room_grid64.yaml` corresponds to our **fully convolutional model**, which we train only on the small crops from our synthetic room dataset. This model can be directly applied to large-scale real-world scenes with real units and generate meshes in a sliding-window manner, as shown in the [teaser](media/teaser_matterport.gif). More details can be found in section 6 of our [supplementary material](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf).
 
 ### Evaluation
 For evaluation of the models, we provide the script `eval_meshes.py`. You can run it using:
