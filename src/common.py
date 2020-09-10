@@ -334,10 +334,12 @@ def coord2index(p, vol_range, reso=None, plane='xz'):
 
     if x.shape[1] == 2:
         index = x[:, 0] + reso * x[:, 1]
+        index[index > reso**2] = reso**2
     elif x.shape[1] == 3:
         index = x[:, 0] + reso * (x[:, 1] + reso * x[:, 2])
+        index[index > reso**3] = reso**3
     
-    return index[None]
+        return index[None]
 
 def update_reso(reso, depth):
     ''' Update the defined resolution so that UNet can process.
