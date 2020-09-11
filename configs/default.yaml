@@ -52,6 +52,7 @@ test:
   threshold: 0.5
   eval_mesh: true
   eval_pointcloud: true
+  remove_wall: false
   model_file: model_best.pt
 generation:
   batch_size: 100000

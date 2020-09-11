@@ -44,7 +44,8 @@ test:
   threshold: 0.2
   eval_mesh: true
   eval_pointcloud: false
-  model_file: model.pt
+  remove_wall: true
+  model_file: model_best.pt
 generation:
   vis_n_outputs: 2
   refine: false

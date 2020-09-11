@@ -45,6 +45,7 @@ test:
   threshold: 0.2
   eval_mesh: true
   eval_pointcloud: false
+  remove_wall: true
   model_file: model_best.pt
 generation:
   generation_dir: generation_new

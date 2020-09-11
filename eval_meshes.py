@@ -128,7 +128,7 @@ for it, data in enumerate(tqdm(test_loader)):
             try:
                 mesh = trimesh.load(mesh_file, process=False)
                 eval_dict_mesh = evaluator.eval_mesh(
-                    mesh, pointcloud_tgt, normals_tgt, points_tgt, occ_tgt)
+                    mesh, pointcloud_tgt, normals_tgt, points_tgt, occ_tgt, remove_wall=cfg['test']['remove_wall'])
                 for k, v in eval_dict_mesh.items():
                     eval_dict[k + ' (mesh)'] = v
             except Exception as e:

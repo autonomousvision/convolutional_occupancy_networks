@@ -37,7 +37,7 @@ class MeshEvaluator(object):
         self.n_points = n_points
 
     def eval_mesh(self, mesh, pointcloud_tgt, normals_tgt,
-                  points_iou, occ_tgt):
+                  points_iou, occ_tgt, remove_wall=False):
         ''' Evaluates a mesh.
 
         Args:
@@ -48,7 +48,7 @@ class MeshEvaluator(object):
             occ_tgt (numpy_array): GT occupancy values for IoU points
         '''
         if len(mesh.vertices) != 0 and len(mesh.faces) != 0:
-            if True: #! Remove walls and floors
+            if remove_wall: #! Remove walls and floors
                 pointcloud, idx = mesh.sample(2*self.n_points, return_index=True)
                 eps = 0.007
                 x_max, x_min = pointcloud_tgt[:, 0].max(), pointcloud_tgt[:, 0].min()
