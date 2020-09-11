@@ -6,8 +6,8 @@ from src.common import normalize_coordinate, normalize_3d_coordinate, map2local
 
 
 class LocalDecoder(nn.Module):
-    ''' Decoder with conditional batch normalization (CBN) class.
-        Instead of conditioning on global features, on plane local features
+    ''' Decoder.
+        Instead of conditioning on global features, on plane/volume local features.
 
     Args:
         dim (int): input dimension
@@ -94,8 +94,8 @@ class LocalDecoder(nn.Module):
 
 
 class PatchLocalDecoder(nn.Module):
-    ''' Decoder with conditional batch normalization (CBN) class.
-        Instead of conditioning on global features, on plane local features
+    ''' Decoder adapted for crop training.
+        Instead of conditioning on global features, on plane/volume local features.
 
     Args:
         dim (int): input dimension
@@ -189,8 +189,7 @@ class PatchLocalDecoder(nn.Module):
         return out
 
 class LocalPointDecoder(nn.Module):
-    ''' Decoder with conditional batch normalization (CBN) class.
-        Instead of conditioning on global features, on plane local features
+    ''' Decoder for PointConv Baseline.
 
     Args:
         dim (int): input dimension

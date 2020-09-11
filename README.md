@@ -1,5 +1,5 @@
 # Convolutional Occupancy Networks
-[**Paper**](https://arxiv.org/pdf/2003.04618.pdf) | [**Supplementary**](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf) | [**Video**](https://www.youtube.com/watch?v=EmauovgrDSM) | [**Teaser Video**](https://youtu.be/k0monzIcjUo) | [**Project Page**](https://pengsongyou.github.io/conv_onet) <br>
+[**Paper**](https://arxiv.org/pdf/2003.04618.pdf) | [**Supplementary**](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf) | [**Video**](https://www.youtube.com/watch?v=EmauovgrDSM) | [**Teaser Video**](https://youtu.be/k0monzIcjUo) | [**Project Page**](https://pengsongyou.github.io/conv_onet) | [**Blog Post**](https://autonomousvision.github.io/convolutional-occupancy-networks/) <br>
 
 <div style="text-align: center">
 <img src="media/teaser_matterport.gif" width="600"/>
@@ -12,7 +12,7 @@ Convolutional Occupancy Networks
 **ECCV 2020 (spotlight)**  
 
 If you find our code or paper useful, please consider citing
-```
+```bibtex
 @inproceedings{Peng2020ECCV,
  author =  {Songyou Peng, Michael Niemeyer, Lars Mescheder, Marc Pollefeys, Andreas Geiger},
  title = {Convolutional Occupancy Networks},
@@ -45,11 +45,14 @@ First, run the script to get the demo data:
 bash scripts/download_demo_data.sh
 ```
 ### Reconstruct Large-Scale Matterport3D Scene
-You can now quickly test our code on the real-world scene shown in the teaser. To this end, simply run
+You can now quickly test our code on the real-world scene shown in the teaser. To this end, simply run:
 ```
 python generate.py configs/pointcloud_crop/demo_matterport.yaml
 ```
-This script should create a folder `out/demo/generation` where the output meshes and input point cloud are stored.
+This script should create a folder `out/demo_matterport/generation` where the output meshes and input point cloud are stored.
+
+**Note**: This experiment corresponds to our **fully convolutional model**, which we train only on the small crops from our synthetic room dataset. This model can be directly applied to large-scale real-world scenes with real units and generate meshes in a sliding-window manner, as shown in the [teaser](media/teaser_matterport.gif). More details can be found in section 6 of our [supplementary material](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf). For training, you can use the script `pointcloud_crop/room_grid64.yaml`.
+
 
 ### Reconstruct Synthetic Indoor Scene
 <div style="text-align: center">
@@ -94,7 +97,7 @@ Download Matterport3D dataset from [the official website](https://niessner.githu
 Download ScanNet v2 data from the [official ScanNet website](https://github.com/ScanNet/ScanNet).
 Then, you can preprocess data with:
 `scripts/dataset_scannet/build_dataset.py` and put into `data/ScanNet` folder.  
-**Note**: Currently, the preprocess script will scale ScanNet data to a unit cube for the comparison as shown in the paper, but you can easily adapt the code to produce data with real units. Then, you can use our fully convolutional model to run evaluation in a sliding-window manner.
+**Note**: Currently, the preprocess script normalizes ScanNet data to a unit cube for the comparison shown in the paper, but you can easily adapt the code to produce data with real-world metric. You can then use our fully convolutional model to run evaluation in a sliding-window manner.
 
 ## Usage
 When you have installed all binary dependencies and obtained the preprocessed data, you are ready to run our pre-trained models and train new models from scratch.
@@ -136,7 +139,6 @@ voxel/voxel_shapenet_1plane.pt
 voxel/voxel_shapenet_3plane.pt
 voxel/voxel_shapenet_grid32.pt
 ```
-**Note**: The `pointcloud_crop/room_grid64.yaml` corresponds to our **fully convolutional model**, which we train only on the small crops from the synthetic room dataset. This model can be directly applied to large-scale scenes with real units and generate meshes in a sliding-window manner, as shown in the [teaser](media/teaser_matterport.gif). More details can be found in section 6 of our[supplementary material](http://www.cvlibs.net/publications/Peng2020ECCV_supplementary.pdf).
 
 ### Evaluation
 For evaluation of the models, we provide the script `eval_meshes.py`. You can run it using:
