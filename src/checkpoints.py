@@ -12,8 +12,9 @@ class CheckpointIO(object):
     Args:
         checkpoint_dir (str): path where checkpoints are saved
     '''
-    def __init__(self, checkpoint_dir='./chkpts', **kwargs):
+    def __init__(self, checkpoint_dir='./chkpts', is_cuda=True, **kwargs):
         self.module_dict = kwargs
+        self.is_cuda = is_cuda
         self.checkpoint_dir = checkpoint_dir
         if not os.path.exists(checkpoint_dir):
             os.makedirs(checkpoint_dir)
@@ -75,7 +76,10 @@ class CheckpointIO(object):
         '''
         print(url)
         print('=> Loading checkpoint from url...')
-        state_dict = model_zoo.load_url(url, progress=True)
+        if self.is_cuda:
+            state_dict = model_zoo.load_url(url, progress=True)
+        else:
+            state_dict = model_zoo.load_url(url, progress=True, map_location=torch.device('cpu'))
         scalars = self.parse_state_dict(state_dict)
         return scalars
 

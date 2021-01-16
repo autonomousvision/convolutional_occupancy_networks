@@ -40,7 +40,7 @@ dataset = config.get_dataset('test', cfg, return_idx=True)
 # Model
 model = config.get_model(cfg, device=device, dataset=dataset)
 
-checkpoint_io = CheckpointIO(out_dir, model=model)
+checkpoint_io = CheckpointIO(out_dir, model=model, is_cuda=is_cuda)
 checkpoint_io.load(cfg['test']['model_file'])
 
 # Generator
