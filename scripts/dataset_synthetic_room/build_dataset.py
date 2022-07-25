@@ -349,7 +349,7 @@ def get_walls(walls, xz_range=[1., 1.], wall_height=0.2):
         wall_x.vertices[:, 1] = wall_x.vertices[:, 1] - min(wall_x.vertices[:, 1]) - 0.5 + groundplane_thickness
         wall_x.vertices[:, 2] = wall_x.vertices[:, 2] - max(wall_x.vertices[:, 2]) + xz_range[1] / 2.
         out_list.append(wall_x)
-    if walls[0] == 3:
+    if walls[3] == 1:
         wall_x = trimesh.creation.box((wall_thickness, wall_height, xz_range[1]))
         # put on ground plane and move to corner
         wall_x.vertices[:, 1] = wall_x.vertices[:, 1] - min(wall_x.vertices[:, 1]) - 0.5 + groundplane_thickness
