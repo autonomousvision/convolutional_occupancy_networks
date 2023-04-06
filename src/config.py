@@ -2,6 +2,10 @@ import yaml
 from torchvision import transforms
 from src import data
 from src import conv_onet
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
 
 
 method_dict = {
@@ -13,13 +17,13 @@ method_dict = {
 def load_config(path, default_path=None):
     ''' Loads config file.
 
-    Args:  
+    Args:
         path (str): path to config file
         default_path (bool): whether to use default path
     '''
     # Load configuration from file itself
     with open(path, 'r') as f:
-        cfg_special = yaml.load(f)
+        cfg_special = yaml.load(f, Loader=Loader)
 
     # Check if we should inherit from a config
     inherit_from = cfg_special.get('inherit_from')
@@ -30,7 +34,7 @@ def load_config(path, default_path=None):
         cfg = load_config(inherit_from, default_path)
     elif default_path is not None:
         with open(default_path, 'r') as f:
-            cfg = yaml.load(f)
+            cfg = yaml.load(f, Loader=Loader)
     else:
         cfg = dict()
 
@@ -146,7 +150,7 @@ def get_dataset(mode, cfg, return_idx=False):
         )
     else:
         raise ValueError('Invalid dataset "%s"' % cfg['data']['dataset'])
- 
+
     return dataset
 
 
@@ -184,13 +188,13 @@ def get_inputs_field(mode, cfg):
             data.SubsamplePointcloud(cfg['data']['pointcloud_n']),
             data.PointcloudNoise(cfg['data']['pointcloud_noise'])
         ])
-    
+
         inputs_field = data.PatchPointCloudField(
-            cfg['data']['pointcloud_file'], 
+            cfg['data']['pointcloud_file'],
             transform,
             multi_files= cfg['data']['multi_files'],
         )
-    
+
     elif input_type == 'voxels':
         inputs_field = data.VoxelsField(
             cfg['data']['voxels_file']
