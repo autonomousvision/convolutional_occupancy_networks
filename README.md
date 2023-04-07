@@ -31,10 +31,6 @@ You can create an anaconda environment called `conv_onet` using
 conda env create -f environment.yaml
 conda activate conv_onet
 ```
-**Note**: you might need to install **torch-scatter** mannually following [the official instruction](https://github.com/rusty1s/pytorch_scatter#pytorch-140):
-```
-pip install torch-scatter==2.0.4 -f https://pytorch-geometric.com/whl/torch-1.4.0+cu101.html
-```
 
 Next, compile the extension modules.
 You can do this via

@@ -2,7 +2,7 @@ method: conv_onet
 data:
   input_type: pointcloud
   classes: null
-  path: /mnt/data/ShapeNet
+  path: data/ShapeNet
   pointcloud_n: 3000
   pointcloud_noise: 0.005
   points_subsample: 2048
