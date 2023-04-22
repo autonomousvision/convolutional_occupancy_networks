@@ -14,7 +14,7 @@ Convolutional Occupancy Networks
 If you find our code or paper useful, please consider citing
 ```bibtex
 @inproceedings{Peng2020ECCV,
- author =  {Songyou Peng, Michael Niemeyer, Lars Mescheder, Marc Pollefeys, Andreas Geiger},
+ author =  {Peng, Songyou and Niemeyer, Michael and Mescheder, Lars and Pollefeys, Marc and Geiger, Andreas},
  title = {Convolutional Occupancy Networks},
  booktitle = {European Conference on Computer Vision (ECCV)},
  year = {2020}}
