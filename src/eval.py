@@ -1,8 +1,7 @@
 import logging
 import numpy as np
 import trimesh
-# from scipy.spatial import cKDTree
-from src.utils.libkdtree import KDTree
+from pykdtree.kdtree import KDTree
 from src.utils.libmesh import check_mesh_contains
 from src.common import compute_iou
 
@@ -59,14 +58,14 @@ class MeshEvaluator(object):
                 x_max, x_min = x_max + eps, x_min - eps
                 y_max, y_min = y_max + eps, y_min - eps
                 z_max, z_min = z_max + eps, z_min - eps
-                
+
                 mask_x = (pointcloud[:, 0] <= x_max) & (pointcloud[:, 0] >= x_min)
                 mask_y =  (pointcloud[:, 1] >= y_min) # floor
                 mask_z = (pointcloud[:, 2] <= z_max) & (pointcloud[:, 2] >= z_min)
 
                 mask = mask_x & mask_y & mask_z
                 pointcloud_new = pointcloud[mask]
-                # Subsample 
+                # Subsample
                 idx_new = np.random.randint(pointcloud_new.shape[0], size=self.n_points)
                 pointcloud = pointcloud_new[idx_new]
                 idx = idx[mask][idx_new]

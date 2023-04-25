@@ -86,7 +86,7 @@ for it, data in enumerate(tqdm(test_loader)):
         model_dict = dataset.get_model_dict(idx)
     except AttributeError:
         model_dict = {'model': str(idx), 'category': 'n/a'}
-    
+
     modelname = model_dict['model']
     category_id = model_dict.get('category', 'n/a')
 
@@ -118,7 +118,7 @@ for it, data in enumerate(tqdm(test_loader)):
 
     if not os.path.exists(in_dir):
         os.makedirs(in_dir)
-    
+
     # Timing dict
     time_dict = {
         'idx': idx,
@@ -134,7 +134,7 @@ for it, data in enumerate(tqdm(test_loader)):
     # Also copy ground truth
     if cfg['generation']['copy_groundtruth']:
         modelpath = os.path.join(
-            dataset.dataset_folder, category_id, modelname, 
+            dataset.dataset_folder, category_id, modelname,
             cfg['data']['watertight_file'])
         out_file_dict['gt'] = modelpath
 
@@ -207,7 +207,7 @@ time_df.set_index(['idx'], inplace=True)
 time_df.to_pickle(out_time_file)
 
 # Create pickle files  with main statistics
-time_df_class = time_df.groupby(by=['class name']).mean()
+time_df_class = time_df.groupby(by=['class name']).mean(numeric_only=True)
 time_df_class.to_pickle(out_time_file_class)
 
 # Print results

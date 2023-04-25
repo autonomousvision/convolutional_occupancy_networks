@@ -1,6 +1,6 @@
 # import multiprocessing
 import torch
-from src.utils.libkdtree import KDTree
+from pykdtree.kdtree import KDTree
 import numpy as np
 import math
 
@@ -56,7 +56,7 @@ def chamfer_distance_naive(points1, points2):
 
     Args:
         points1 (numpy array): first point set
-        points2 (numpy array): second point set    
+        points2 (numpy array): second point set
     '''
     assert(points1.size() == points2.size())
     batch_size, T, _ = points1.size()
@@ -265,7 +265,7 @@ def normalize_3d_coordinate(p, padding=0.1):
         p (tensor): point
         padding (float): conventional padding paramter of ONet for unit cube, so [-0.5, 0.5] -> [-0.55, 0.55]
     '''
-    
+
     p_nor = p / (1 + padding + 10e-4) # (-0.5, 0.5)
     p_nor = p_nor + 0.5 # range (0, 1)
     # f there are outliers out of the range
@@ -286,7 +286,7 @@ def normalize_coord(p, vol_range, plane='xz'):
     p[:, 0] = (p[:, 0] - vol_range[0][0]) / (vol_range[1][0] - vol_range[0][0])
     p[:, 1] = (p[:, 1] - vol_range[0][1]) / (vol_range[1][1] - vol_range[0][1])
     p[:, 2] = (p[:, 2] - vol_range[0][2]) / (vol_range[1][2] - vol_range[0][2])
-    
+
     if plane == 'xz':
         x = p[:, [0, 2]]
     elif plane =='xy':
@@ -294,7 +294,7 @@ def normalize_coord(p, vol_range, plane='xz'):
     elif plane =='yz':
         x = p[:, [1, 2]]
     else:
-        x = p    
+        x = p
     return x
 
 def coordinate2index(x, reso, coord_type='2d'):
@@ -326,7 +326,7 @@ def coord2index(p, vol_range, reso=None, plane='xz'):
     '''
     # normalize to [0, 1]
     x = normalize_coord(p, vol_range, plane=plane)
-    
+
     if isinstance(x, np.ndarray):
         x = np.floor(x * reso).astype(int)
     else: #* pytorch tensor
@@ -338,7 +338,7 @@ def coord2index(p, vol_range, reso=None, plane='xz'):
     elif x.shape[1] == 3:
         index = x[:, 0] + reso * (x[:, 1] + reso * x[:, 2])
         index[index > reso**3] = reso**3
-    
+
     return index[None]
 
 def update_reso(reso, depth):
@@ -353,7 +353,7 @@ def update_reso(reso, depth):
         for i in range(base):
             if ((reso + i) / base).is_integer():
                 reso = reso + i
-                break    
+                break
     return reso
 
 def decide_total_volume_range(query_vol_metric, recep_field, unit_size, unet_depth):
@@ -377,7 +377,7 @@ def decide_total_volume_range(query_vol_metric, recep_field, unit_size, unet_dep
     # handle the case when resolution is too large
     if reso > 10000:
         reso = 1
-    
+
     return input_vol, query_vol, reso
 
 def add_key(base, new, base_name, new_name, device=None):
