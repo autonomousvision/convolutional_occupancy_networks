@@ -2,7 +2,7 @@ from os import listdir, makedirs, getcwd
 from os.path import join, exists, isdir, exists
 import json
 import trimesh
-import numpy as np 
+import numpy as np
 from copy import deepcopy
 import shutil
 import zipfile
@@ -17,7 +17,7 @@ base_path = 'data/Matterport3D/v1/scans'
 scene_name = 'JmbYfDe2QKZ'
 out_path = 'data/Matterport3D_processed'
 scene_path = join(base_path, scene_name, 'region_segmentations')
-regions = [join(scene_path, 'region'+str(m)+'.ply')) 
+regions = [join(scene_path, 'region'+str(m)+'.ply')
            for m in range(100) if exists(join(scene_path, 'region'+str(m)+'.ply'))]
 outfile = join(out_path, scene_name)
 create_dir(outfile)
@@ -48,7 +48,7 @@ for idx, r_path in tqdm(enumerate(regions)):
         if save_part_mesh == True:
             out_file = join(outfile, 'mesh_fused%d.ply'%idx)
             mesh.export(out_file)
-    
+
     if idx == 0:
         faces = mesh.faces
         vertices = mesh.vertices
